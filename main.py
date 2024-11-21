@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -12,7 +12,7 @@ class Item(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/webhooks")
+@app.post("/webhooks", status_code=200)
 async def handle_webhook(item: Item):
     print(item)  # Example: Print the payload for debugging
     
