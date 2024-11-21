@@ -3,10 +3,16 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+class Data:
+    type: str
+    id: int
+
 class Item(BaseModel):
-    nip: str
-    email: str
-    category: str
+    store_id: str
+    producer: str
+    scope: str
+    data: Data
+    hash: str
 
 @app.get("/")
 async def root():
