@@ -26,10 +26,9 @@ async def root():
 
 @app.post("/webhooks", status_code=200)
 async def handle_webhook(item: Item):
-    print(item)  # Example: Print the payload for debugging
-
-    # order_sender = order.OrderSender(STORE_HASH, API_TOKEN, BIGBUY_API_KEY)
-    # order_data = order_sender.get_order_data(104)
-    # print(order_data)
+    # Get the order from BigCommerce and submit to BigBuy
+    order_sender = order.OrderSender(STORE_HASH, API_TOKEN, BIGBUY_API_KEY)
+    order_data = order_sender.get_order_data(item.data.id)
+    print(order_data)
     
     return {"message": "Webhook received successfully"}
