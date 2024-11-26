@@ -28,7 +28,7 @@ async def root():
 async def handle_webhook(item: Item):
     # Get the order from BigCommerce and submit to BigBuy
     order_sender = order.OrderSender(STORE_HASH, API_TOKEN, BIGBUY_API_KEY)
-    order_data = order_sender.get_order_data(item.data.id)
+    order_data = order_sender.get_and_send_order(item.data.id)
     print(order_data)
     
     return {"message": "Webhook received successfully"}

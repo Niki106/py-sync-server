@@ -88,7 +88,6 @@ class OrderSender:
 
         return order_data
 
-
     # Get variants from BigCommerce and send to BigBuy.
     def get_and_send_order(self, order_id):
         # Get order data from BigCommerce
