@@ -95,6 +95,7 @@ class OrderSender:
     def get_and_send_order(self, order_id):
         # Get order data from BigCommerce
         order_data = self.get_order_data(order_id)
+        print(order_data)
 
         if order_data is None:
             return
@@ -105,6 +106,6 @@ class OrderSender:
         if response.status_code == 200:
             logging.info(f"Submitted the order successfully.")
         else:
-            logging.error(f"Error submitting order: {response.text}")
+            logging.error(f"Error while submitting order: {response.text}")
 
         
