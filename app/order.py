@@ -11,7 +11,8 @@ class OrderSender:
         self.headers = {
             "X-Auth-Token": f"{self.api_token}"
         }
-        self.bigbuy_base_url = f"https://api.bigbuy.eu/rest/catalog/"
+        # self.bigbuy_base_url = f"https://api.bigbuy.eu/rest/catalog/"
+        self.bigbuy_base_url = f"https://api.sandbox.bigbuy.eu/rest/catalog/"
         self.bigbuy_api_key = bigbuy_api_key
         self.bigbuy_headers = {
             "Authorization": f"Bearer {self.bigbuy_api_key}"
