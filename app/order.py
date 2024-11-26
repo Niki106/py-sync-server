@@ -96,14 +96,15 @@ class OrderSender:
     def get_and_send_order(self, order_id):
         # Get order data from BigCommerce
         order_data = self.get_order_data(order_id)
-        print(order_data)
-
         if order_data is None:
             return
         
+        bigbuy_data = {
+            "order": order_data
+        }
         # Submit the order to BigBuy
         url = f"{self.bigbuy_base_url}create"
-        response = requests.post(url, headers=self.bigbuy_headers, json=order_data)
+        response = requests.post(url, headers=self.bigbuy_headers, json=bigbuy_data)
         if response.status_code == 200:
             logging.info(f"Submitted the order successfully.")
         else:
