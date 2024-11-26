@@ -1,6 +1,7 @@
 import requests
 import json
 import xml.etree.ElementTree as ET
+import shortuuid
 import logging
 
 class OrderSender:
@@ -83,7 +84,7 @@ class OrderSender:
         order_data = {}
         order_data['products'] = products_json
         order_data['shippingAddress'] = shipping_address_json
-        order_data['internalReference'] = products_json
+        order_data['internalReference'] = shortuuid.uuid()
         order_data['language'] = 'en'
         order_data['paymentMethod'] = 'paypal'
         order_data['carriers'] = [{"name": "standard shipment"}]
