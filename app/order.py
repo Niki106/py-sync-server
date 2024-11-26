@@ -18,7 +18,7 @@ class OrderSender:
             "Authorization": f"Bearer {self.bigbuy_api_key}"
         }
 
-        logging.basicConfig(filename='var/log/order_sync.log', level=logging.INFO)
+        logging.basicConfig(filename='order_sync.log', level=logging.INFO)
 
     def get_xml_data(self, url):
         # url = f"{self.base_url}{order_id}"
