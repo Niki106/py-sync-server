@@ -1,7 +1,7 @@
 import requests
 import json
 import xml.etree.ElementTree as ET
-
+import logging
 
 class OrderSender:
     def __init__(self, store_hash, api_token, bigbuy_api_key):
@@ -12,11 +12,13 @@ class OrderSender:
             "X-Auth-Token": f"{self.api_token}"
         }
         # self.bigbuy_base_url = f"https://api.bigbuy.eu/rest/catalog/"
-        self.bigbuy_base_url = f"https://api.sandbox.bigbuy.eu/rest/catalog/"
+        self.bigbuy_base_url = f"https://api.sandbox.bigbuy.eu/rest/order/"
         self.bigbuy_api_key = bigbuy_api_key
         self.bigbuy_headers = {
             "Authorization": f"Bearer {self.bigbuy_api_key}"
         }
+
+        logging.basicConfig(filename='order_sync.log', level=logging.INFO)
 
     def get_xml_data(self, url):
         # url = f"{self.base_url}{order_id}"
@@ -86,6 +88,7 @@ class OrderSender:
         order_data['paymentMethod'] = 'paypal'
         order_data['carriers'] = [{"name": "standard shipment"}]
 
+        logging.info('Prepared order data.')
         return order_data
 
     # Get variants from BigCommerce and send to BigBuy.
@@ -97,11 +100,11 @@ class OrderSender:
             return
         
         # Submit the order to BigBuy
-        url = f"{self.bigbuy_base_url}products/{new_product_id}/variant"
+        url = f"{self.bigbuy_base_url}create"
         response = requests.post(url, headers=self.bigbuy_headers, json=order_data)
         if response.status_code == 200:
-            print(f"Submitted the order successfully.")
+            logging.info(f"Submitted the order successfully.")
         else:
-            print(f"Error submitting order: {response.text}")
+            logging.error(f"Error submitting order: {response.text}")
 
         

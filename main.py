@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Response
 from pydantic import BaseModel
+import logging
 
 from app import order
 
@@ -29,7 +30,6 @@ async def handle_webhook(item: Item):
     # Get the order from BigCommerce and submit to BigBuy
     order_sender = order.OrderSender(STORE_HASH, API_TOKEN, BIGBUY_API_KEY)
     order_data = order_sender.get_and_send_order(item.data.id)
-    print(order_data)
     
     return {"message": "Webhook received successfully"}
 
