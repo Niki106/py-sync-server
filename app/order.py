@@ -59,7 +59,7 @@ class OrderSender:
             product_json = {}
             for child in product:
                 if child.tag == 'quantity': product_json['quantity'] = child.text.strip() if child.text else ''
-                if child.tag == 'sku': product_json['sku'] = child.text.strip() if child.text else ''
+                if child.tag == 'reference': product_json['sku'] = child.text.strip() if child.text else ''
             
             products_json.append(product_json)
         
@@ -78,7 +78,6 @@ class OrderSender:
             if child.tag == 'zip': shipping_address_json['postcode'] = child.text.strip() if child.text else ''
             if child.tag == 'company': shipping_address_json['companyName'] = child.text.strip() if child.text else ''
             if child.tag == 'phone': shipping_address_json['phone'] = child.text.strip() if child.text else ''
-            if child.tag == 'street1': shipping_address_json['address'] = child.text.strip() if child.text else ''
 
         # Prepare order data for BigBuy
         order_data = {}
@@ -102,6 +101,8 @@ class OrderSender:
         bigbuy_data = {
             "order": order_data
         }
+        print(json.dumps(bigbuy_data, indent=4))
+
         # Submit the order to BigBuy
         url = f"{self.bigbuy_base_url}create"
         response = requests.post(url, headers=self.bigbuy_headers, json=bigbuy_data)
