@@ -101,7 +101,7 @@ class OrderSender:
         bigbuy_data = {
             "order": order_data
         }
-        print(json.dumps(bigbuy_data, indent=4))
+        # print(json.dumps(bigbuy_data, indent=4))
 
         # Submit the order to BigBuy
         url = f"{self.bigbuy_base_url}create"
