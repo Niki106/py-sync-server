@@ -59,7 +59,7 @@ class OrderSender:
             product_json = {}
             for child in product:
                 if child.tag == 'quantity': product_json['quantity'] = child.text.strip() if child.text else ''
-                if child.tag == 'reference': product_json['sku'] = child.text.strip() if child.text else ''
+                if child.tag == 'sku': product_json['reference'] = child.text.strip() if child.text else ''
             
             products_json.append(product_json)
         
@@ -70,7 +70,7 @@ class OrderSender:
         address = shipping_addresses_root.find('address')
         for child in address:
             if child.tag == 'first_name': shipping_address_json['firstName'] = child.text.strip() if child.text else ''
-            if child.tag == 'last_name': shipping_address_json['lasttName'] = child.text.strip() if child.text else ''
+            if child.tag == 'last_name': shipping_address_json['lastName'] = child.text.strip() if child.text else ''
             if child.tag == 'country_iso2': shipping_address_json['country'] = child.text.strip().lower() if child.text else ''
             if child.tag == 'email': shipping_address_json['email'] = child.text.strip() if child.text else ''
             if child.tag == 'city': shipping_address_json['town'] = child.text.strip() if child.text else ''
